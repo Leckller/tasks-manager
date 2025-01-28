@@ -16,7 +16,7 @@ export default class taskService {
         try {
             return await this.taskRepo.find();
         } catch (err) {
-            throw new BadRequestException("Error: ", err);
+            throw new BadRequestException("[Error - getTasks]: ", err);
         }
     }
 
@@ -29,9 +29,36 @@ export default class taskService {
             return "Success: tarefa criada";
             
         } catch (err) {
-            throw new BadRequestException("Error: ", err);
+            throw new BadRequestException("[Error - addTasks]: ", err);
         }
-        return
+    }
+
+    public async removeTask(taskId: number) {
+        try {
+            
+            const task = await this.taskRepo.findOne({where: {id: +taskId}});
+            await this.taskRepo.remove(task);
+
+            return "Success: tarefa removida";
+            
+        } catch (err) {
+            throw new BadRequestException("[Error - removeTasks]: ", err);
+        }
+    }
+
+    public async editTask(taskId: number, titulo: string) {
+        try {
+            
+            const task = await this.taskRepo.findOne({where: {id: +taskId}});
+            task.titulo = titulo;
+
+            await this.taskRepo.save(task);
+
+            return "Success: tarefa editada";
+            
+        } catch (err) {
+            throw new BadRequestException("[Error - editTasks]: ", err);
+        }
     }
 
 
