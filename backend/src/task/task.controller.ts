@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Patch, Post, UseGuards } from "@nestjs/common";
 import taskType from "src/types/task.type";
 import taskService from "./task.service";
 import { addTaskDto } from "./DTOs/addTask.dto";
 import { editTaskDto } from "./DTOs/editTask.dto";
 import { removeTaskDto } from "./DTOs/removeTask.dto";
+import AuthGuard from "src/Guard/Auth.Guard";
 
+@UseGuards(AuthGuard)
 @Controller({
     path: 'task'
 })
