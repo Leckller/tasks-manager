@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import taskEntity from './task/task.entity';
 import taskModule from './task/task.module';
+import userEntity from './user/user.entity';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import taskModule from './task/task.module';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'task_manager.db',
-      entities: [taskEntity],
+      entities: [taskEntity, userEntity],
       synchronize: true,
     })
   ],

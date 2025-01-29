@@ -20,10 +20,17 @@ export default class taskService {
         }
     }
 
-    public async addTask(titulo: string) {
+    public async addTask(titulo: string, ...subIds: number[]) {
         try {
             
             const task = this.taskRepo.create({titulo});
+
+            if(subIds.length > 0) {
+
+                
+
+            }
+
             await this.taskRepo.save(task);
 
             return "Success: tarefa criada";

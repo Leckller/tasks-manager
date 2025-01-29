@@ -1,5 +1,6 @@
 import taskType from "src/types/task.type";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import userEntity from "src/user/user.entity";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export default class taskEntity implements taskType{
@@ -8,6 +9,15 @@ export default class taskEntity implements taskType{
 
     @Column()
     titulo: string;
+
+    @Column()
+    descricao: string;
+
+    @ManyToMany(() => taskEntity, (taskentity) => taskentity.subTarefas)
+    subTarefas: taskEntity[];
+
+    @ManyToOne(() => userEntity, (entity) => entity.tarefas)
+    usuario: userEntity;
 
     @Column({default: false})
     completada: boolean;
